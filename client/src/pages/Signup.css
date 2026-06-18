@@ -1,0 +1,179 @@
+.signup-container {
+    min-height: 100vh;
+    display: flex;
+}
+
+.signup-left {
+    flex: 1;
+    background: #031133;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 80px;
+}
+
+.signup-left h1 {
+    font-size: 4rem;
+    color: #4fc3ff;
+    margin-bottom: 20px;
+}
+
+.signup-left h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.signup-left p {
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+.signup-right {
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding-top: 120px;
+
+    background: #f8f9fc;
+}
+
+.signup-card {
+    width: 400px;
+    background: white;
+    padding: 40px;
+
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    transform: translateY(-40px);
+}
+
+.signup-card h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #031133;
+}
+
+.signup-card input {
+    padding: 14px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+}
+
+.signup-card button {
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #031133;
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 16px;
+}
+
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-container input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.password-container button {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    border: none;
+    background: transparent;
+
+    cursor: pointer;
+
+    color: #666;
+    font-size: 18px;
+    z-index: 10;
+}
+
+.signup-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.login-text {
+    text-align: center;
+    color: #666;
+}
+
+.login-link {
+    color: #031133;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+
+.logo-link {
+    text-decoration: none;
+}
+
+.logo-link h1 {
+    color: #4fc3ff;
+}
+
+.logo-link {
+    text-decoration: none;
+    width: fit-content;
+}
+
+.logo-link:hover {
+    opacity: 0.9;
+}
+
+.message {
+    color: red;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.password-strength {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.Weak {
+    color: red;
+}
+
+.Medium {
+    color: orange;
+}
+
+.Strong {
+    color: green;
+}
