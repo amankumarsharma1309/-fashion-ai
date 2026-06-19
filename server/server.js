@@ -20,13 +20,13 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-transporter.verify(function (error, success) {
-  if (error) {
-    console.log("BREVO VERIFY ERROR:", error);
-  } else {
-    console.log("BREVO SMTP READY");
-  }
-});
+// transporter.verify(function (error, success) {
+//   if (error) {
+//     console.log("BREVO VERIFY ERROR:", error);
+//   } else {
+//     console.log("BREVO SMTP READY");
+//   }
+// });
 
 const connectDB = require("./db");
 
@@ -40,6 +40,12 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.get("/env-check", (req, res) => {
+  res.json({
+    brevoUser: process.env.BREVO_USER,
+    hasPass: !!process.env.BREVO_PASS,
+  });
+});
 
 app.get("/test-email", async (req, res) => {
   try {
