@@ -12,7 +12,7 @@ const cors = require("cors");
 //"Hey Nodemailer, use my Gmail account to send emails." meaning of the below line
 const transporter = nodemailer.createTransport({
   host: "smtp-relay.brevo.com",
-  port: 587,
+  port: 2525,
   secure: false,
   auth: {
     user: process.env.BREVO_USER,
