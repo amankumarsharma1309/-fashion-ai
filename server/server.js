@@ -44,7 +44,7 @@ app.get("/env-check", (req, res) => {
 app.get("/test-email", async (req, res) => {
   try {
     const info = await transporter.sendMail({
-      from: process.env.BREVO_USER,
+      from: '"FashionAI" <fashionai.sharmajis.dev@gmail.com>',
       to: "rishavrajsharma6@gmail.com",
       subject: "FashionAI Test",
       text: "Testing",
@@ -98,7 +98,7 @@ app.post("/send-otp", async (req, res) => {
 
   try {
     const info = await transporter.sendMail({
-     from: process.env.BREVO_USER,
+      from: '"FashionAI" <fashionai.sharmajis.dev@gmail.com>',
       to: email,
       subject: "FashionAI OTP",
       text: `Your FashionAI OTP is ${otp}`,
