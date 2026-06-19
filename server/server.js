@@ -86,12 +86,22 @@ app.post("/send-otp", async (req, res) => {
   console.log("EMAIL_PASS exists =", !!process.env.EMAIL_PASS);
   console.log("Sending OTP to:", email);
 
-  await transporter.sendMail({
-    from: process.env.EMAIL_USER,
-    to: email,
-    subject: "FashionAI OTP",
-    text: `Your FashionAI OTP is ${otp}`,
-  });
+  try {
+    const info = await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: "FashionAI OTP",
+      text: `Your FashionAI OTP is ${otp}`,
+    });
+
+    console.log("Mail sent:", info.response);
+  } catch (err) {
+    console.error("MAIL ERROR:", err);
+    return res.status(500).json({
+      message: "Failed to send OTP",
+      error: err.message,
+    });
+  }
   res.json({
     message: "OTP sent successfully!",
   });
