@@ -34,12 +34,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.get("/env-check", (req, res) => {
-  res.json({
-    brevoUser: process.env.BREVO_USER,
-    hasPass: !!process.env.BREVO_PASS,
-  });
-});
+
 
 app.get("/test-email", async (req, res) => {
   try {
@@ -92,8 +87,7 @@ app.post("/send-otp", async (req, res) => {
     expiresAt,
   });
 
-  console.log("BREVO_USER =", process.env.BREVO_USER);
-  console.log("BREVO_PASS exists =", !!process.env.BREVO_PASS);
+ 
   console.log("Sending OTP to:", email);
 
   try {
