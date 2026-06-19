@@ -82,6 +82,10 @@ app.post("/send-otp", async (req, res) => {
     expiresAt,
   });
 
+  console.log("EMAIL_USER =", process.env.EMAIL_USER);
+  console.log("EMAIL_PASS exists =", !!process.env.EMAIL_PASS);
+  console.log("Sending OTP to:", email);
+
   await transporter.sendMail({
     from: process.env.EMAIL_USER,
     to: email,
