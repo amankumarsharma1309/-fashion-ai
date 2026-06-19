@@ -49,8 +49,9 @@ function Signup() {
         }
         try {
             const response = await axios.post(
-                "http://localhost:5000/send-otp",
+                `${import.meta.env.VITE_API_URL}/send-otp`,
                 {
+                    
                     name,
                     email,
                     password,
@@ -72,7 +73,7 @@ function Signup() {
     async function handleVerifyOtp() {
         try {
             const response = await axios.post(
-                "http://localhost:5000/verify-otp",
+                `${import.meta.env.VITE_API_URL}/verify-otp`,
                 {
                     email,
                     otp,

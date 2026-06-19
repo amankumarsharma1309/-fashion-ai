@@ -182,7 +182,7 @@ Would you like outfit recommendations too?`,
     try {
       setLoading(true);
       const response = await axios.get(
-        `http://localhost:5000/recommendation?message=${encodeURIComponent(
+        `${import.meta.env.VITE_API_URL}/recommendation?message=${encodeURIComponent(
           userMessage
         )}`
       );
@@ -341,7 +341,7 @@ Would you like outfit recommendations too?`,
 
 
         const response = await axios.post(
-          "http://localhost:5000/fashion-recommendation",
+          `${import.meta.env.VITE_API_URL}/fashion-recommendation`,
           {
             height,
             weight,

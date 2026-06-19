@@ -26,7 +26,7 @@ function Profile() {
     }
 
     const response = await axios.get(
-      "http://localhost:5000/profile",
+      `${import.meta.env.VITE_API_URL}/profile`,
       {
         headers: {
           authorization: token,
