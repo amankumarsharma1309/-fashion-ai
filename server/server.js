@@ -20,13 +20,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// transporter.verify(function (error, success) {
-//   if (error) {
-//     console.log("BREVO VERIFY ERROR:", error);
-//   } else {
-//     console.log("BREVO SMTP READY");
-//   }
-// });
+
 
 const connectDB = require("./db");
 
