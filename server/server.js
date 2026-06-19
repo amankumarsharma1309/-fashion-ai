@@ -11,7 +11,10 @@ const cors = require("cors");
 
 //"Hey Nodemailer, use my Gmail account to send emails." meaning of the below line
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  family: 4, // force IPv4
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
