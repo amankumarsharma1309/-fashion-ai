@@ -82,7 +82,7 @@ function Chatbot() {
           ...prev,
           {
             sender: "bot",
-            text: "What's your weight?",
+            text: "What's your weight?\n(e.g. 70 kg)",
           },
         ]);
 
@@ -161,7 +161,7 @@ Would you like outfit recommendations too?`,
           ...prev,
           {
             sender: "bot",
-            text: "What's your preferred style?",
+            text: "What's your preferred style?\nChoose the vibe that matches you.",
             widget: "stylePreference",
           },
         ]);
@@ -247,7 +247,7 @@ Would you like outfit recommendations too?`,
           ...prev,
           {
             sender: "bot",
-            text: "What's your height?",
+            text: "What's your height?\n(e.g. 175 cm)",
           },
         ]);
 
@@ -283,12 +283,17 @@ Would you like outfit recommendations too?`,
 
       return;
     }
-    if (
-      option === "Warm Undertone" ||
-      option === "Cool Undertone" ||
-      option === "Neutral Undertone" ||
-      option === "Olive Undertone"
-    ) {
+    const skinTones = [
+      "🌤 Fair",
+      "🙂 Light",
+      "☀️ Medium",
+      "🌞 Tan",
+      "🤎 Brown",
+      "🌑 Dark",
+      "🤷 Not Sure",
+    ];
+
+    if (skinTones.includes(option)) {
       setSkinTone(option);
 
       setMessages((prev) => [
@@ -318,13 +323,16 @@ Would you like outfit recommendations too?`,
       return;
     }
 
-    if (
-      option === "Old Money" ||
-      option === "Streetwear" ||
-      option === "Smart Casual" ||
-      option === "Formal" ||
-      option === "Minimalist"
-    ) {
+    const styles = [
+      "💎 Old Money",
+      "🛹 Streetwear",
+      "👔 Smart Casual",
+      "🎩 Formal",
+      "⚪ Minimalist",
+      "🤷 Not Sure",
+    ];
+
+    if (styles.includes(option)) {
       setStyle(option);
 
       setMessages((prev) => [
@@ -401,7 +409,9 @@ Would you like outfit recommendations too?`,
                       <pre>{msg.text}</pre>
                     </div>
                   ) : (
-                    msg.text
+                    <span style={{ whiteSpace: "pre-line" }}>
+                      {msg.text}
+                    </span>
                   )}
                   {msg.widget === "mainMenu" && !msg.answered && (
                     <div className="option-cards">
@@ -462,38 +472,51 @@ Would you like outfit recommendations too?`,
                     <div className="option-cards">
 
                       <button
-                        onClick={() =>
-                          handleOptionClick("Warm Undertone")
-                        }
+                        onClick={() => handleOptionClick("🌤 Fair")}
                       >
-                        <span>Warm Undertone</span>
+                        <span>🌤 Fair</span>
                         <FaChevronRight />
                       </button>
 
                       <button
-                        onClick={() =>
-                          handleOptionClick("Cool Undertone")
-                        }
+                        onClick={() => handleOptionClick("🙂 Light")}
                       >
-                        <span>Cool Undertone</span>
+                        <span>🙂 Light</span>
                         <FaChevronRight />
                       </button>
 
                       <button
-                        onClick={() =>
-                          handleOptionClick("Neutral Undertone")
-                        }
+                        onClick={() => handleOptionClick("☀️ Medium")}
                       >
-                        <span>Neutral Undertone</span>
+                        <span>☀️ Medium</span>
                         <FaChevronRight />
                       </button>
 
                       <button
-                        onClick={() =>
-                          handleOptionClick("Olive Undertone")
-                        }
+                        onClick={() => handleOptionClick("🌞 Tan")}
                       >
-                        <span>Olive Undertone</span>
+                        <span>🌞 Tan</span>
+                        <FaChevronRight />
+                      </button>
+
+                      <button
+                        onClick={() => handleOptionClick("🤎 Brown")}
+                      >
+                        <span>🤎 Brown</span>
+                        <FaChevronRight />
+                      </button>
+
+                      <button
+                        onClick={() => handleOptionClick("🌑 Dark")}
+                      >
+                        <span>🌑 Dark</span>
+                        <FaChevronRight />
+                      </button>
+
+                      <button
+                        onClick={() => handleOptionClick("🤷 Not Sure")}
+                      >
+                        <span>🤷 Not Sure</span>
                         <FaChevronRight />
                       </button>
 
@@ -504,46 +527,55 @@ Would you like outfit recommendations too?`,
 
                       <button
                         onClick={() =>
-                          handleOptionClick("Old Money")
+                          handleOptionClick("💎 Old Money")
                         }
                       >
-                        <span>Old Money</span>
+                        <span>💎 Old Money</span>
                         <FaChevronRight />
                       </button>
 
                       <button
                         onClick={() =>
-                          handleOptionClick("Streetwear")
+                          handleOptionClick("🛹 Streetwear")
                         }
                       >
-                        <span>Streetwear</span>
+                        <span>🛹 Streetwear</span>
                         <FaChevronRight />
                       </button>
 
                       <button
                         onClick={() =>
-                          handleOptionClick("Smart Casual")
+                          handleOptionClick("👔 Smart Casual")
                         }
                       >
-                        <span>Smart Casual</span>
+                        <span>👔 Smart Casual</span>
                         <FaChevronRight />
                       </button>
 
                       <button
                         onClick={() =>
-                          handleOptionClick("Formal")
+                          handleOptionClick("🎩 Formal")
                         }
                       >
-                        <span>Formal</span>
+                        <span>🎩 Formal</span>
                         <FaChevronRight />
                       </button>
 
                       <button
                         onClick={() =>
-                          handleOptionClick("Minimalist")
+                          handleOptionClick("⚪ Minimalist")
                         }
                       >
-                        <span>Minimalist</span>
+                        <span>⚪ Minimalist</span>
+                        <FaChevronRight />
+                      </button>
+
+                      <button
+                        onClick={() =>
+                          handleOptionClick("🤷 Not Sure")
+                        }
+                      >
+                        <span>🤷 Not Sure</span>
                         <FaChevronRight />
                       </button>
 

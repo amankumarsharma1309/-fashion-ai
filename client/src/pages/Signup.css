@@ -154,7 +154,6 @@
 }
 
 .message {
-    color: red;
     text-align: center;
     font-size: 18px;
     font-weight: 600;
@@ -176,4 +175,12 @@
 
 .Strong {
     color: green;
+}
+
+.success-message {
+    color: #22c55e;
+}
+
+.error-message {
+    color: #ef4444;
 }

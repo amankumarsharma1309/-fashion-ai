@@ -10,6 +10,7 @@ function Login() {
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [message, setMessage] = useState("");
+    const [isSuccess, setIsSuccess] = useState(false);
     const navigate = useNavigate();
 
     async function handleLogin() {
@@ -111,11 +112,9 @@ function Login() {
                     <button type="submit">
                         Login
                     </button>
-                    {message && (
-                        <p className="message">
-                            {message}
-                        </p>
-                    )}
+                    <p className={message.includes("successful") ? "success-message" : "error-message"}>
+                        {message}
+                    </p>
 
                     <p className="login-text">
                         Don't have an account?{" "}
