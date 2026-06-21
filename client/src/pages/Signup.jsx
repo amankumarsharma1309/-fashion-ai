@@ -42,36 +42,58 @@ function Signup() {
     const navigate = useNavigate();
     const [showOtp, setShowOtp] = useState(false);
     const [otp, setOtp] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [verifying, setVerifying] = useState(false);
     async function handleSignup() {
         if (!name || !email || !password) {
             setMessage("All fields are required!");
             return;
         }
+
         try {
+            setLoading(true);
+
             const response = await axios.post(
                 `${import.meta.env.VITE_API_URL}/send-otp`,
                 {
-                    
                     name,
                     email,
                     password,
                 }
             );
+
             if (
                 response.data.message ===
                 "OTP sent successfully!"
             ) {
                 setShowOtp(true);
+
+                setMessage(
+                    "✅ OTP sent successfully! Check your email."
+                );
+            } else {
+                setMessage(response.data.message);
             }
-            setMessage(response.data.message);
 
         } catch (error) {
             console.log(error);
+
+            setMessage(
+                "❌ Failed to send OTP. Please try again."
+            );
+        } finally {
+            setLoading(false);
         }
     }
 
     async function handleVerifyOtp() {
+        if (otp.length !== 6) {
+            setMessage("❌ OTP must be 6 digits");
+            return;
+        }
         try {
+            setVerifying(true);
+
             const response = await axios.post(
                 `${import.meta.env.VITE_API_URL}/verify-otp`,
                 {
@@ -81,10 +103,14 @@ function Signup() {
             );
 
             setMessage(response.data.message);
+
             if (
                 response.data.message ===
                 "Signup successful"
             ) {
+                setMessage(
+                    "✅ Account created successfully! Redirecting to login..."
+                );
                 setTimeout(() => {
                     navigate("/login");
                 }, 2000);
@@ -92,6 +118,9 @@ function Signup() {
 
         } catch (error) {
             console.log(error);
+            setMessage("❌ Invalid OTP");
+        } finally {
+            setVerifying(false);
         }
     }
 
@@ -192,15 +221,26 @@ function Signup() {
                                     type="text"
                                     placeholder="Enter OTP"
                                     value={otp}
+                                    maxLength={6}
                                     onChange={(e) => {
-                                        setOtp(e.target.value)
+                                        setOtp(e.target.value.replace(/\D/g, ""))
                                         setMessage("")
                                     }
 
                                     }
                                 />
-                                <button onClick={handleVerifyOtp}>
-                                    Verify OTP
+                                <button
+                                    onClick={handleVerifyOtp}
+                                    disabled={verifying || otp.length !== 6}
+                                >
+                                    {verifying ? (
+                                        <>
+                                            <span className="spinner"></span>
+                                            Verifying...
+                                        </>
+                                    ) : (
+                                        "Verify OTP"
+                                    )}
                                 </button>
                             </>
 
@@ -209,8 +249,18 @@ function Signup() {
 
                     {
                         !showOtp && (
-                            <button onClick={handleSignup}>
-                                Create Account
+                            <button
+                                onClick={handleSignup}
+                                disabled={loading}
+                            >
+                                {loading ? (
+                                    <>
+                                        <span className="spinner"></span>
+                                        Sending OTP...
+                                    </>
+                                ) : (
+                                    "Create Account"
+                                )}
                             </button>
                         )
                     }

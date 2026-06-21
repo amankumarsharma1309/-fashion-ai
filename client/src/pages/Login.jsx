@@ -12,9 +12,12 @@ function Login() {
     const [message, setMessage] = useState("");
     const [isSuccess, setIsSuccess] = useState(false);
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
 
     async function handleLogin() {
         try {
+            setLoading(true);
+
             const response = await axios.post(
                 `${import.meta.env.VITE_API_URL}/login`,
                 {
@@ -22,18 +25,23 @@ function Login() {
                     password,
                 }
             );
+
             setMessage(response.data.message);
+
             if (response.data.message === "Login successful") {
+                setMessage("✅ Login successful! Redirecting...");
                 localStorage.setItem("token", response.data.token);
+
                 setTimeout(() => {
                     navigate("/");
                 }, 2000);
             }
 
-
             console.log(response.data);
         } catch (error) {
             console.log(error);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -109,8 +117,18 @@ function Login() {
                         </button>
                     </div>
 
-                    <button type="submit">
-                        Login
+                    <button
+                        type="submit"
+                        disabled={loading}
+                    >
+                        {loading ? (
+                            <>
+                                <span className="spinner"></span>
+                                Logging in...
+                            </>
+                        ) : (
+                            "Login"
+                        )}
                     </button>
                     <p className={message.includes("successful") ? "success-message" : "error-message"}>
                         {message}
