@@ -346,28 +346,39 @@ Would you like outfit recommendations too?`,
       setLoading(true);
 
       setTimeout(async () => {
+        try {
+          const response = await axios.post(
+            `${import.meta.env.VITE_API_URL}/fashion-recommendation`,
+            {
+              height,
+              weight,
+              skinTone,
+              occasion,
+              style: option,
+            }
+          );
 
+          setMessages((prev) => [
+            ...prev,
+            {
+              sender: "bot",
+              text: response.data.recommendation,
+              recommendation: true,
+            },
+          ]);
+        } catch (error) {
+          console.error(error);
 
-        const response = await axios.post(
-          `${import.meta.env.VITE_API_URL}/fashion-recommendation`,
-          {
-            height,
-            weight,
-            skinTone,
-            occasion,
-            style: option,
-          }
-        );
-        setLoading(false)
-
-        setMessages((prev) => [
-          ...prev,
-          {
-            sender: "bot",
-            text: response.data.recommendation,
-            recommendation: true,
-          },
-        ]);
+          setMessages((prev) => [
+            ...prev,
+            {
+              sender: "bot",
+              text: "Unable to generate recommendation right now. Please try again.",
+            },
+          ]);
+        } finally {
+          setLoading(false);
+        }
       }, 1000);
 
       return;

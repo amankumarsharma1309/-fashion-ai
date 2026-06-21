@@ -87,7 +87,7 @@ app.post("/send-otp", async (req, res) => {
     expiresAt,
   });
 
- 
+
   console.log("Sending OTP to:", email);
 
   try {
@@ -171,27 +171,32 @@ app.get("/recommendation", async (req, res) => {
 });
 
 app.post("/fashion-recommendation", async (req, res) => {
-  const {
-    height,
-    weight,
-    skinTone,
-    occasion,
-    style,
-  } = req.body;
+  try {
+    const {
+      height,
+      weight,
+      skinTone,
+      occasion,
+      style,
+    } = req.body;
 
-  const recommendation = await aiStylist({
-    height,
-    weight,
-    skinTone,
-    occasion,
-    style,
-  });
+    const recommendation = await aiStylist({
+      height,
+      weight,
+      skinTone,
+      occasion,
+      style,
+    });
 
-  res.json({
-    recommendation,
-  });
-}
-);
+    res.json({ recommendation });
+  } catch (error) {
+    console.error("FASHION ERROR:", error);
+
+    res.status(500).json({
+      message: "Failed to generate recommendation",
+    });
+  }
+});
 
 
 //signup starts here!
